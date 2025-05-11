@@ -19,7 +19,11 @@ def wait_for_timer_zero(url: str):
                 break
             time.sleep(0.1)
 
-        browser.close()
+        if timer_text.startswith("0:00"):
+            print("[✓] Timer started! Start bot now.")
+            keyboard.press('right')
+            time.sleep(5)
+            keyboard.release('right')
 
 # Example usage
 wait_for_timer_zero("https://f1-contest.com/versions/th/lazada/en.html?utm_source=meta_traf&utm_medium=image&_campaign=lazada_f1_game&utm_campaign=lazada_f1_game&utm_id=7052025&utm_content=boost&fbclid=IwY2xjawKNDrpleHRuA2FlbQIxMABicmlkETFmeFcwN1VvQ2VlUmJQV3RVAR5PVfdjYvdCNQJaSQkSsxHEijzq_q9rzdRqQ_hXyUph2GkLYf2MNNBo4fJl-Q_aem_4Jnql_TSVyyYYKB7pMEN7w")
