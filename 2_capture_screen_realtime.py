@@ -36,5 +36,5 @@ def capture_window_realtime(window_name):
     cv2.destroyAllWindows()
 
 # 🔁 Replace with the actual title of your window
-window_name = "LEGO® - Google Chrome"
+window_name = "BROWNDUST II"
 capture_window_realtime(window_name)

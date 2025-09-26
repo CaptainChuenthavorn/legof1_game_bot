@@ -8,7 +8,6 @@ import cv2
 import numpy as np
 import mss
 import threading
-
 def countdown_message(task_description, seconds=3):
     for i in range(seconds, 0, -1):
         print(f"🕒 {task_description} in {i} second{'s' if i > 1 else ''}...")
@@ -55,7 +54,7 @@ def press_right_key(duration=5):
 
 # === Thread 2: Capture screen
 def threaded_screen_capture():
-    capture_window_realtime("LEGO® - Chromium", duration=180)
+    capture_window_realtime("BrownDust II", duration=180)
 
 def run_game_bot(url: str):
     with sync_playwright() as p:
@@ -73,58 +72,6 @@ def run_game_bot(url: str):
         page.keyboard.type("2001")
         print("[✓] Year submitted")
 
-        time.sleep(1)
-        click_red_bull_card("LEGO® - Chromium")
-
-        print("[*] Clicking Start Race...")
-        page.wait_for_selector("button.cta-button.cta-button--normal")
-        page.click("button.cta-button.cta-button--normal")
-        print("[✓] Race started")
-        # t2 = threading.Thread(target=threaded_screen_capture)
-        # t2.start()
-        # print("[*] Waiting for timer to hit 0:00.000...")
-        # page.wait_for_selector(".game__ui__stats__text--time", timeout=30000)
-
-        # while True:
-        #     timer_text = page.inner_text(".game__ui__stats__text--time").strip()
-        #     print("Current timer:", timer_text)
-        #     if timer_text.startswith("0:00"):
-        #         print("[✓] Timer started! Driving...")
-        #         break
-        #     time.sleep(0.05)
-        
-        # # === Start both threads
-        # t1 = threading.Thread(target=press_right_key)
-        
-
-        # t1.start()
-        
-
-        # t1.join()
-        # t2.join()
-        # === Start screen capture before timer
-        t2 = threading.Thread(target=threaded_screen_capture, daemon=True)
-        t2.start()
-
-        # Wait for 0:00 timer
-        print("[*] Waiting for timer to hit 0:00.000...")
-        page.wait_for_selector(".game__ui__stats__text--time", timeout=30000)
-
-        while True:
-            timer_text = page.inner_text(".game__ui__stats__text--time").strip()
-            print("Current timer:", timer_text)
-            if timer_text.startswith("0:00"):
-                print("[✓] Timer started! Driving...")
-                break
-            time.sleep(0.05)
-
-        # Start right-arrow drive
-        t1 = threading.Thread(target=press_right_key, daemon=True)
-        t1.start()
-
-        # Wait for both to finish
-        t1.join()
-        t2.join()
 
 if __name__ == "__main__":
     run_game_bot("https://f1-contest.com/versions/th/lazada/en.html?utm_source=meta_traf&utm_medium=image&_campaign=lazada_f1_game&utm_campaign=lazada_f1_game&utm_id=7052025&utm_content=boost")
